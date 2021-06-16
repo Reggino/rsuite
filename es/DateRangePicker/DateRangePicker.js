@@ -120,24 +120,21 @@ function (_React$Component) {
       _this.updateValue(event, value, closeOverlay);
     };
 
-    _this.updateValue = function (event, nextSelectValue, closeOverlay) {
+    _this.updateValue = function (event, nextValue, closeOverlay) {
       if (closeOverlay === void 0) {
         closeOverlay = true;
       }
 
-      var _this$state = _this.state,
-          value = _this$state.value,
-          selectValue = _this$state.selectValue;
+      var selectValue = _this.state.selectValue;
       var onChange = _this.props.onChange;
-      var nextValue = !_isUndefined(nextSelectValue) ? nextSelectValue : selectValue;
 
       _this.setState({
         selectValue: nextValue || [],
         value: nextValue
       });
 
-      if (onChange && (!isSameDay(nextValue[0], value[0]) || !isSameDay(nextValue[1], value[1]))) {
-        onChange(nextValue, event);
+      if (onChange && (selectValue.length && (!nextValue || !nextValue.length) || !isSameDay(nextValue[0], selectValue[0]) || !isSameDay(nextValue[1], selectValue[1]))) {
+        onChange(nextValue || [], event);
       } // `closeOverlay` default value is `true`
 
 
@@ -155,9 +152,9 @@ function (_React$Component) {
     };
 
     _this.handleChangeSelectValue = function (date, event) {
-      var _this$state2 = _this.state,
-          selectValue = _this$state2.selectValue,
-          doneSelected = _this$state2.doneSelected;
+      var _this$state = _this.state,
+          selectValue = _this$state.selectValue,
+          doneSelected = _this$state.doneSelected;
       var _this$props2 = _this.props,
           onSelect = _this$props2.onSelect,
           oneTap = _this$props2.oneTap;
@@ -214,11 +211,11 @@ function (_React$Component) {
     };
 
     _this.handleMouseMoveSelectValue = function (date) {
-      var _this$state3 = _this.state,
-          doneSelected = _this$state3.doneSelected,
-          selectValue = _this$state3.selectValue,
-          hoverValue = _this$state3.hoverValue,
-          currentHoverDate = _this$state3.currentHoverDate;
+      var _this$state2 = _this.state,
+          doneSelected = _this$state2.doneSelected,
+          selectValue = _this$state2.selectValue,
+          hoverValue = _this$state2.hoverValue,
+          currentHoverDate = _this$state2.currentHoverDate;
       var hoverRange = _this.props.hoverRange;
 
       if (currentHoverDate && isSameDay(date, currentHoverDate)) {
@@ -303,9 +300,9 @@ function (_React$Component) {
     };
 
     _this.disabledOkButton = function () {
-      var _this$state4 = _this.state,
-          selectValue = _this$state4.selectValue,
-          doneSelected = _this$state4.doneSelected;
+      var _this$state3 = _this.state,
+          selectValue = _this$state3.selectValue,
+          doneSelected = _this$state3.doneSelected;
 
       if (!selectValue[0] || !selectValue[1] || !doneSelected) {
         return true;
@@ -438,9 +435,9 @@ function (_React$Component) {
 
   _proto.disabledByBetween = function disabledByBetween(start, end, type) {
     var disabledDate = this.props.disabledDate;
-    var _this$state5 = this.state,
-        selectValue = _this$state5.selectValue,
-        doneSelected = _this$state5.doneSelected;
+    var _this$state4 = this.state,
+        selectValue = _this$state4.selectValue,
+        doneSelected = _this$state4.doneSelected;
     var selectStartDate = selectValue[0];
     var selectEndDate = selectValue[1];
     var nextSelectValue = [selectStartDate, selectEndDate]; // If the date is between the start and the end
@@ -468,11 +465,11 @@ function (_React$Component) {
         oneTap = _this$props6.oneTap,
         showWeekNumbers = _this$props6.showWeekNumbers,
         showOneCalendar = _this$props6.showOneCalendar;
-    var _this$state6 = this.state,
-        calendarDate = _this$state6.calendarDate,
-        selectValue = _this$state6.selectValue,
-        hoverValue = _this$state6.hoverValue,
-        doneSelected = _this$state6.doneSelected;
+    var _this$state5 = this.state,
+        calendarDate = _this$state5.calendarDate,
+        selectValue = _this$state5.selectValue,
+        hoverValue = _this$state5.hoverValue,
+        doneSelected = _this$state5.doneSelected;
     var classes = classNames(this.addPrefix('daterange-menu'), menuClassName);
     var panelClasses = classNames(this.addPrefix('daterange-panel'), (_classNames = {}, _classNames[this.addPrefix('daterange-panel-show-one-calendar')] = showOneCalendar, _classNames));
     var pickerProps = {
