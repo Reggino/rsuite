@@ -121,6 +121,10 @@ function (_React$Component) {
     };
 
     _this.updateValue = function (event, nextValue, closeOverlay) {
+      if (nextValue === void 0) {
+        nextValue = [];
+      }
+
       if (closeOverlay === void 0) {
         closeOverlay = true;
       }
@@ -129,7 +133,7 @@ function (_React$Component) {
       var onChange = _this.props.onChange;
 
       _this.setState({
-        selectValue: nextValue || [],
+        selectValue: nextValue,
         value: nextValue
       });
 
